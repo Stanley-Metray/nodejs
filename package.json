@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Stanley-Metray/nodejs/issues"
   },
-  "homepage": "https://github.com/Stanley-Metray/nodejs#readme"
+  "homepage": "https://github.com/Stanley-Metray/nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
