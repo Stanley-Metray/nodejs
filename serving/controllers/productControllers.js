@@ -1,6 +1,5 @@
 const path = require('path');
-
-const products = new Array();
+const Product = require("../models/products");
 
 module.exports.getHomePageController = (req, res) => {
     res.sendFile(path.join(__dirname, '../', "views", "shop.html"));
@@ -11,7 +10,8 @@ module.exports.getAddProductController = (req,res)=>{
 }
 
 module.exports.postAddProductController = (req, res)=>{
-    products.push(req.body.product);
+    const product = new Product(Math.random().toString(), req.body.product);
+    product.save();
     res.redirect('/');
 };
 
@@ -28,6 +28,12 @@ module.exports.postSuccessController = (req,res)=>{
 };
 
 module.exports.getProducts = (req,res)=>{
-    res.send(products);
+    res.send(Product.getAllProducts());
 }
+
+module.exports.getProduct = (req, res) => {
+    const id = req.params.productId; 
+    const product = Product.getProduct(id);
+    res.send(product);
+};
 

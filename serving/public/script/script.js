@@ -6,10 +6,11 @@
         }
         const products = await response.json();
         const list = document.getElementById('products');
+        console.log(products);
         if (products.length > 0)
             products.forEach((value) => {
                 listElement = document.createElement('li');
-                listElement.innerText = value;
+                listElement.innerText = value.title;
                 list.appendChild(listElement);
             });
         else
