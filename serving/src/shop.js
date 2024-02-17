@@ -17,6 +17,8 @@ router.post('/success', productController.postSuccessController);
 
 router.get('/get-products', productController.getProducts);
 
-router.get('/get-product/:productId', productController.getProduct);
+router.get('/get-product', productController.getProduct);
+
+router.post('/post-product', productController.postProduct);
 
 module.exports = router;

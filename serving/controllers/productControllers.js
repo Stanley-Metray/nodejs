@@ -32,8 +32,12 @@ module.exports.getProducts = (req,res)=>{
 }
 
 module.exports.getProduct = (req, res) => {
-    const id = req.params.productId; 
-    const product = Product.getProduct(id);
-    res.send(product);
+    res.sendFile(path.join(__dirname, "../", "views", "get-product.html"));
 };
 
+
+module.exports.postProduct = (req,res)=>{
+    const id = req.body.product;
+    const product = Product.getProduct(id);
+    res.send(product);
+}
