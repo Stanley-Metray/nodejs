@@ -23,4 +23,25 @@ module.exports = class Product
     static getAllProducts(){
         return products;
     }
+
+    static updateProduct(id, title)
+    {
+        for(let i=0; i<products.length; i++)
+        {
+            if(products[i].id===id)
+                products[i].title = title;
+        }
+    }
+
+    static deleteProduct(id, title)
+    {
+        let index = undefined;
+        for(let i=0; i<products.length; i++)
+        {
+            if(products[i].id===id)
+                index = i;
+        }
+
+        products.splice(index, 1);
+    }
 }

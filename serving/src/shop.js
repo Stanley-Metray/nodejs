@@ -21,4 +21,12 @@ router.get('/get-product', productController.getProduct);
 
 router.post('/post-product', productController.postProduct);
 
+router.get('/edit-product', productController.getEditProduct);
+
+router.post('/update-product', productController.updateProduct)
+
+router.get('/delete-product', productController.getDelete);
+
+router.post('/delete-product', productController.postDeleteProduct);
+
 module.exports = router;
