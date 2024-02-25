@@ -5,6 +5,9 @@ const router = express.Router();
 
 router.get("/", chatController.loginUser);
 
-// router.post("/login-user", chatController.postLoginUser);
+router.get('/chat', chatController.getChat);
 
+router.post('/chat', chatController.postChat)
+
+router.get('/get-chat-data', chatController.getChatData);
 module.exports = router;

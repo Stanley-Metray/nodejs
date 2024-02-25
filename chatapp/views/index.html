@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Chat</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <body>
     <div class="container">
-        <form action="/login-user" id="loginForm" class="d-flex flex-column gap-2 w-50 me-auto ms-auto" method="post">
+        <form id="loginForm" class="d-flex flex-column gap-2 w-50 me-auto ms-auto" method="post">
             <h1 class="text-primary"><strong>Login</strong></h1>
-            <input type="text" name="username" class="form-control" placeholder="Username">
+            <input type="text" name="username" id="username" class="form-control" placeholder="Enter User Name">
             <button class="btn btn-success">Login</button>
         </form>
     </div>
     <script src="/script.js" defer></script>
 </body>
+
 </html>
