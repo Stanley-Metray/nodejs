@@ -1,9 +1,5 @@
 const path = require('path');
-const Product = require('../models/product');
-
-const product = new Product();
-
-product.connect();
+const {addProduct, deleteProduct}= require('../models/product');
 
 module.exports.getHome = (req,res)=>{
     res.sendFile(path.join(__dirname, "../views", "index.html"));
@@ -15,7 +11,7 @@ module.exports.getAddProduct = (req,res)=>{
 
 module.exports.postAddProduct = async(req,res)=>{
    try {
-    const result = await product.addProduct(req.body);
+    const result = await addProduct(req.body);
     res.send("Product Addedd");
    } catch (error) {
         console.log(error);
@@ -28,7 +24,7 @@ module.exports.getDeleteProduct = (req,res)=>{
 
 module.exports.postDeleteProduct = async (req,res)=>{
     try {
-        const result = await product.deleteProduct(req.body.title);
+        const result = await deleteProduct(req.body.title);
         res.send("Product Deleted");
        } catch (error) {
             console.log(error);
