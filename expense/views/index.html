@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div class="container py-3">
+        <form id="expense-form" action="/add-expense" method="post"
+            class="d-flex flex-column gap-3 w-50 ms-auto me-auto">
+            <h4 class="text-success">Add Expense</h4>
+            <input type="text" name="item" class="form-control" placeholder="Item">
+            <input type="number" name="price" class="form-control" placeholder="Price">
+            <input type="text" name="description" class="form-control" placeholder="Description">
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+        </form>
+    </div>
+    <div class="container py-5 w-75 me-auto ms-auto">
+        <table class="table table-dark border border-2" id="expense-table">
+            <h4 class="text-dark text-center my-3">Expense Table</h4>
+
+        </table>
+        <div class="alert text-success bg-dark" role="alert" id="total">
+            A simple info alert—check it out!
+        </div>
+
+    </div>
+
+    <script src="/script.js" defer></script>
+</body>
+
+</html>
