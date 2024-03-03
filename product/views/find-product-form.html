@@ -19,12 +19,10 @@
     </nav>
 
     <div class="container">
-        <form action="/add-product" method="post" id="form-add-product" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
-            <h4 class="text-primary">Add Product</h4>
+        <form action="/get-product" method="post" id="form-add-product" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
+            <h4 class="text-danger">Search Product</h4>
             <input type="text" class="form-control" placeholder="Title" name="title">
-            <input type="textarea" class="form-control" placeholder="Description" name="description">
-            <input type="text" class="form-control" placeholder="URL" name="imageurl">
-            <button class="btn btn-success" type="submit">Add Product</button>
+            <button class="btn btn-primary" type="submit">Search</button>
         </form>
     </div>
 </body>

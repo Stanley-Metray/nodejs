@@ -14,17 +14,16 @@
             <li><a class="btn btn-primary" href="/get-all-products">Get All Products</a></li>
             <li><a class="btn btn-primary" href="/delete-product">Delete Product</a></li>
             <li><a class="btn btn-primary" href="/user">User</a></li>
-            <li><a class="btn btn-primary" href="/cart">Cart</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <form action="/add-product" method="post" id="form-add-product" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
-            <h4 class="text-primary">Add Product</h4>
-            <input type="text" class="form-control" placeholder="Title" name="title">
-            <input type="textarea" class="form-control" placeholder="Description" name="description">
-            <input type="text" class="form-control" placeholder="URL" name="imageurl">
-            <button class="btn btn-success" type="submit">Add Product</button>
+        <form action="/add-user" method="post" id="form-add-product" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
+            <h4 class="text-primary">Create User</h4>
+            <input type="text" class="form-control" placeholder="Username" name="username">
+            <input type="email" class="form-control" placeholder="Email" name="email">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <button class="btn btn-success" type="submit">Create User</button>
         </form>
     </div>
 </body>

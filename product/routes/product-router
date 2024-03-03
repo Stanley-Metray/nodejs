@@ -14,4 +14,10 @@ router.get('/delete-product', productController.getDeleteProduct);
 
 router.post('/delete-product', productController.postDeleteProduct);
 
+router.get('/get-all-products', productController.getAllProducts);
+
+router.get('/get-product', productController.getProduct);
+
+router.post('/get-product', productController.postGetProduct);
+
 module.exports =  router;

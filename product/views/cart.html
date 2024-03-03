@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        .img-thumbnail {
+            height: 200px !important;
+            width: 200px !important;
+            object-fit: contain;
+            object-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="container py-3">
+        <ul class="d-flex flex-row gap-3 list-unstyled">
+            <li><a class="btn btn-primary" href="/add-product">Add Product</a></li>
+            <li><a class="btn btn-primary" href="/get-product">Get Product</a></li>
+            <li><a class="btn btn-primary" href="/get-all-products">Get All Products</a></li>
+            <li><a class="btn btn-primary" href="/delete-product">Delete Product</a></li>
+            <li><a class="btn btn-primary" href="/user">User</a></li>
+            <li><a class="btn btn-primary" href="/cart">Cart</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"><span class="text-secondary fw-bold h5">Products</span>
+                <ul class="list-unstyled py-3 d-flex flex-column justify-content-center align-items-center gap-2"
+                    id="products">
+
+                </ul>
+            </div>
+            <div class="col-md-6"><span class="text-dark fw-bold h5">Cart</span>
+                <ul class="list-unstyled py-3 d-flex flex-column justify-content-center align-items-center gap-2"
+                    id="cart">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        let products = undefined;
+        document.addEventListener('DOMContentLoaded', async (e) => {
+            try {
+                const response = await axios.get('/get-all-products');
+                products = await response.data;
+                if (products) {
+                    let html = "";
+                    products.forEach((product, index) => {
+                        html += `<li>
+                            <div class="card" style="width: 18rem;">
+                                <img src='${product.imageurl}' class="card-img-top" alt="loading">
+                                    <div class="card-body">
+                                    <h5 class="card-title">${product.title}</h5>
+                                    <p class="card-text">${product.description}</p>
+                                        <button id='${index}' class="add-to-cart btn btn-warning" onclick='addToCart(event)'>Add To Cart</button>
+                                </div>
+                            </div>
+                            </li>`;
+                    });
+
+                    document.getElementById('products').innerHTML = html;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+
+        const addToCart = (e) => {
+            const cart = document.getElementById('cart');
+            const li = document.createElement('li');
+            li.classList.add(["d-flex", "flex-column", "gap-3"]);
+            const product = products[e.target.id];
+            li.innerHTML = `<div><img class="img-thumbnail" src='${product.imageurl}'/></div> <div><span class='h4'>${product.title}</span></div>`;
+
+            cart.appendChild(li);
+        }
+    </script>
+</body>
+
+</html>
