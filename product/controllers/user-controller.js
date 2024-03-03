@@ -7,6 +7,7 @@ module.exports.getAddUser = (req,res)=>{
 
 module.exports.postAddUser = async(req,res)=>{
     try {
+        console.log(req.body);
         const createdUser = await User.create(req.body);
         if(createdUser)
             res.send(200, createdUser);

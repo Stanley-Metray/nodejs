@@ -39,18 +39,28 @@
 
                 </ul>
             </div>
-            <div class="col-md-6"><span class="text-dark fw-bold h5">Cart</span>
-                <ul class="list-unstyled py-3 d-flex flex-column justify-content-center align-items-center gap-2"
-                    id="cart">
-
-                </ul>
+            <div class="col-md-6 mb-3"><span class="text-dark fw-bold h5">Cart</span>
+                <ul class="list-unstyled list-group list-group-flush d-flex flex-column gap-3" id="cart">
+                    
+                  </ul>
+                  <div class="card-footer my-5 fst-italic fs-5 text-success fw-bold" id="total-price">
+                    
+                  </div>
+                
+                <button class="my-3 w-100 btn btn-danger" id="remove-cart">Remove Cart</button>
             </div>
         </div>
     </div>
     </div>
     <script>
         let products = undefined;
-        document.addEventListener('DOMContentLoaded', async (e) => {
+        document.addEventListener('DOMContentLoaded', (e) => {
+            setProducts(e);
+            setCartItems(e);
+        });
+
+
+        const setProducts = async (e) => {
             try {
                 const response = await axios.get('/get-all-products');
                 products = await response.data;
@@ -63,6 +73,7 @@
                                     <div class="card-body">
                                     <h5 class="card-title">${product.title}</h5>
                                     <p class="card-text">${product.description}</p>
+                                    <p class='text-dark fw-bold'>Rs. ${product.price.toLocaleString()}</p>
                                         <button id='${index}' class="add-to-cart btn btn-warning" onclick='addToCart(event)'>Add To Cart</button>
                                 </div>
                             </div>
@@ -74,17 +85,73 @@
             } catch (error) {
                 console.log(error);
             }
+        }
+
+
+        const setCartItems = async () => {
+            try {
+                const response = await axios.get('/get-cart-items');
+                const cartItems = response.data;
+                let totalPrice = 0;
+                const cart = document.getElementById('cart');
+                document.getElementById('total-price').innerText="";
+                cart.innerHTML = "";
+                cartItems.forEach((cartItem) => {
+                    products.forEach((product) => {
+                        if (product.id === cartItem.ProductId) {
+                            const li = document.createElement('li');
+                            li.classList.add(["list-group-item", "d-flex", "flex-row", "gap-5", "my-3"]);
+                            li.innerHTML = `<img class="img-thumbnail" src='${product.imageurl}'/> <span class='fw-bold fs-4'>${product.title}</span> <br><span class='fw-bold fs-6'>Price: ${product.price.toLocaleString()}</span>
+                            `;
+                            cart.appendChild(li);
+
+                            totalPrice += product.price;
+                        }
+                    });
+                    document.getElementById('total-price').innerText = `Total Price: ${totalPrice.toLocaleString()}`;
+
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        const addToCart = async (e) => {
+
+            const cartItem = {
+                UserId: localStorage.getItem('id'),
+                ProductId: products[e.target.id].id,
+                quantity: 1
+            }
+
+            try {
+                const response = await axios.post('/add-to-cart', cartItem, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                setCartItems();
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        document.getElementById('remove-cart').addEventListener('click', async(e)=>{
+            try {
+                const response = await axios.post('/remove-cart', {userId : localStorage.getItem('id')}, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                });
+                if(response.status===200)
+                    setCartItems();
+            } catch (error) {
+                
+            }
         });
 
-        const addToCart = (e) => {
-            const cart = document.getElementById('cart');
-            const li = document.createElement('li');
-            li.classList.add(["d-flex", "flex-column", "gap-3"]);
-            const product = products[e.target.id];
-            li.innerHTML = `<div><img class="img-thumbnail" src='${product.imageurl}'/></div> <div><span class='h4'>${product.title}</span></div>`;
-
-            cart.appendChild(li);
-        }
     </script>
 </body>
 

@@ -20,6 +20,10 @@ exports.Product = sequelize.define('Product', {
     imageurl: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    price : {
+        type : DataTypes.DOUBLE,
+        allowNull : false
     }
 });
 

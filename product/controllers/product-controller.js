@@ -19,6 +19,8 @@ module.exports.postAddProduct = async (req, res) => {
     }
 }
 
+// const updateQuantity = async()
+
 module.exports.getDeleteProduct = (req, res) => {
     res.sendFile(path.join(__dirname, "../views", "delete-product.html"));
 }

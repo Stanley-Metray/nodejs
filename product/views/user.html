@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <nav class="container py-3">
@@ -14,11 +17,12 @@
             <li><a class="btn btn-primary" href="/get-all-products">Get All Products</a></li>
             <li><a class="btn btn-primary" href="/delete-product">Delete Product</a></li>
             <li><a class="btn btn-primary" href="/user">User</a></li>
+            <li><a class="btn btn-primary" href="/cart">Cart</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <form action="/add-user" method="post" id="form-add-product" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
+        <form action="/add-user" method="post" id="form-add-user" class="d-flex w-50 ms-auto me-auto flex-column gap-3">
             <h4 class="text-primary">Create User</h4>
             <input type="text" class="form-control" placeholder="Username" name="username">
             <input type="email" class="form-control" placeholder="Email" name="email">
@@ -26,5 +30,29 @@
             <button class="btn btn-success" type="submit">Create User</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('form-add-user').addEventListener('submit', async(e)=>{
+            e.preventDefault();
+            
+            try {
+                const response = await axios.post('/add-user', new FormData(e.target), {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                });
+
+                if(response)
+                {
+                    const user = await response.data;
+                    console.log(user)
+                    localStorage.setItem('id', user.id);
+                    localStorage.setItem('username', user.username);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
 </body>
 </html>
